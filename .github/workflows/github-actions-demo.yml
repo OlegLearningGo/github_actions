@@ -16,11 +16,13 @@ jobs: # блок тасков
   
     runs-on: ubuntu-latest # на чем гоняем таску
     steps: # таски
-    - name: Print Hello message
+    - name: Print Hello message in Testing
       run: echo "hello, world from Testing job"
     
   my_deploy:
+    needs: [my_testing]
     runs-on: ubuntu-latest
+    
     steps: # таски
-    - name: Print Hello message
+    - name: Print Hello message in Deploy
       run: echo "Hello, world from Deploy job"
