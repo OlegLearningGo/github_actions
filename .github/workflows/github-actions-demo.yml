@@ -3,7 +3,10 @@
 # comments
 # 
 name: My_GitHub_Actions_Basics
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+# run-name необязателен
+env:
+    APPLICATION_NAME: "MyFlask"
+    DEPLOY_PACKAGE_NAME    : "flask-deploy-ver-${{ github.sha }}"
 # запуск по статусу (events)
 # push в мастер ветку (файл запускается при таком условии)
 on: [push]
@@ -15,6 +18,12 @@ jobs: # блок тасков
     steps: # таски
     - name: Print Hello message in Testing
       run: echo "hello, world from Testing job"
+
+    - name: Execute few commands
+      run: | 
+          echo "Hello message 1"
+          echo "Hello message 2"
+          echo "APPlication name: ${{ env.APPLCATION_NAME }}"
     
   my_deploy:
     needs: [my_testing]
@@ -23,3 +32,6 @@ jobs: # блок тасков
     steps: # таски
     - name: Print Hello message in Deploy
       run: echo "Hello, world from Deploy job"
+
+    - name: Printing deployment package
+      run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
