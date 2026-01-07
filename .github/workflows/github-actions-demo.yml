@@ -36,10 +36,21 @@ jobs: # блок тасков
   my_deploy:
     needs: [my_testing]
     runs-on: ubuntu-latest
-    
+    env:
+        VAR1: "This is job level variable 1"
+        VAR2: "This is job level variable 2"
+        
     steps: # таски
     - name: Print Hello message in Deploy
       run: echo "Hello, world from Deploy job"
+    
+    - name: print env vars
+      run: |
+          echo "var1 = ${{ env.VAR1 }}"
+          echo "var2 = ${{ env.VAR2 }}"
+          echo "var3 = $LOCAL_VAR"
+      env:
+          LOCAL_VAR: "Local variable"
 
     - name: Printing deployment package
       run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
