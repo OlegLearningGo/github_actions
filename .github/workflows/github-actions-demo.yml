@@ -26,6 +26,12 @@ jobs: # блок тасков
           echo "APPlication name: ${{ env.APPLICATION_NAME }}"
     - name: List current folder
       run: ls -la
+    ### копия файлов в докер контейнер - клонируем репозиторий (чекаут полный)
+    - name: Git clone my repo
+      uses: actions/checkout@v1
+
+    - name: List current folder
+      run: ls -la
     
   my_deploy:
     needs: [my_testing]
@@ -37,3 +43,9 @@ jobs: # блок тасков
 
     - name: Printing deployment package
       run: echo "Deploy package name is ${{ env.DEPLOY_PACKAGE_NAME }}"
+
+    - name: Test aws packages
+      run: aws --version
+
+    - name: Test zip packages
+      run: zip --version
