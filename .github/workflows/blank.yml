@@ -1,0 +1,34 @@
+## first pipeline
+stages:
+    - stage_build
+    - stage_test
+    - stage_deploy
+variables:
+    OWNER_NAME: SHD_SAN
+    CICD_VERSION: v1.0
+    LOG_FILE_NAME: log.txt
+build_job:
+    stage: stage_build
+    script:
+        - echo "--Build_started--"
+        - echo "Building">>$LOG_FILE_NAME
+        - echo "--Build_complete!--"
+test_job1:
+    stage: stage_test
+    script: 
+        - echo "--Test1--"
+        - echo "Testing1" >> $LOG_FILE_NAME
+        - echo "--Test1_complete--"
+test_job2:
+    stage: stage_test
+    script: 
+        - echo "--Test2--"
+        - echo "Testing2" >> $LOG_FILE_NAME
+        - echo "--Test2_complete--"
+deploy_to_dev_job:
+    stage: stage_deploy
+    script:
+        - echo "--Deploy_started--"
+        - echo "Deploy">>$LOG_FILE_NAME
+        - echo "--Deploy_complete!--"
+        - cat $LOG_FILE_NAME
