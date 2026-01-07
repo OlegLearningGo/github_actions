@@ -1,34 +1,18 @@
-## first pipeline
-stages:
-    - stage_build
-    - stage_test
-    - stage_deploy
-variables:
-    OWNER_NAME: SHD_SAN
-    CICD_VERSION: v1.0
-    LOG_FILE_NAME: log.txt
-build_job:
-    stage: stage_build
-    script:
-        - echo "--Build_started--"
-        - echo "Building">>$LOG_FILE_NAME
-        - echo "--Build_complete!--"
-test_job1:
-    stage: stage_test
-    script: 
-        - echo "--Test1--"
-        - echo "Testing1" >> $LOG_FILE_NAME
-        - echo "--Test1_complete--"
-test_job2:
-    stage: stage_test
-    script: 
-        - echo "--Test2--"
-        - echo "Testing2" >> $LOG_FILE_NAME
-        - echo "--Test2_complete--"
-deploy_to_dev_job:
-    stage: stage_deploy
-    script:
-        - echo "--Deploy_started--"
-        - echo "Deploy">>$LOG_FILE_NAME
-        - echo "--Deploy_complete!--"
-        - cat $LOG_FILE_NAME
+name: GitHub Actions Demo
+run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+on: [push]
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v5
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "🍏 This job's status is ${{ job.status }}."
