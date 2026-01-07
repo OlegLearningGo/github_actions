@@ -23,7 +23,9 @@ jobs: # блок тасков
       run: | 
           echo "Hello message 1"
           echo "Hello message 2"
-          echo "APPlication name: ${{ env.APPLCATION_NAME }}"
+          echo "APPlication name: ${{ env.APPLICATION_NAME }}"
+    - name: List current folder
+      run: ls -la
     
   my_deploy:
     needs: [my_testing]
